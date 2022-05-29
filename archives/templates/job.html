@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list">
+        <div class="ttl_page">
+            <h1 class="in_text">{{ object.title }}</h1>
+        </div>
+        <div class="job">
+            {% if object.keywords %}
+                <div class="job_keywords">
+                    {{ object.keywords }}
+                </div>
+            {% endif %}
+            <table>
+                {% if object.category %}
+                    <tr>
+                        <th>職種</th>
+                        <td>{{ object.category }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.jobtype %}
+                    <tr>
+                        <th>雇用形態</th>
+                        <td>{{ object.jobtype }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>仕事内容</th>
+                    <td>{{ object.description | safe }}</td>
+                </tr>
+                <tr>
+                    <th>給与</th>
+                    <td>{{ object.salary | safe }}</td>
+                </tr>
+                {% if object.rawsalary %}
+                    <tr>
+                        <th>給与の詳細</th>
+                        <td>{{ object.rawsalary | safe }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>勤務地</th>
+                    <td>{{ object.streetaddress | safe }}</td>
+                </tr>
+                <tr>
+                    <th>最寄駅</th>
+                    <td>{{ object.station | safe }}</td>
+                </tr>
+                {% if object.subwayaccess %}
+                    <tr>
+                        <th>交通アクセス</th>
+                        <td>{{ object.subwayaccess | safe }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.timeshift %}
+                    <tr>
+                        <th>勤務時間</th>
+                        <td>{{ object.timeshift | safe }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>会社名</th>
+                    <td>{{ object.company }}</td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>〒{{ object.date }} {{ object.streetaddress }}</td>
+                </tr>
+                {% if object.experience %}
+                    <tr>
+                        <th>経験</th>
+                        <td>{{ object.experience | safe }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.education %}
+                    <tr>
+                        <th>最終学歴</th>
+                        <td>{{ object.education | safe }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.benefits %}
+                    <tr>
+                        <th>待遇・福利厚生</th>
+                        <td>{{ object.benefits | safe }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.hires %}
+                    <tr>
+                        <th>採用予定人数</th>
+                        <td>{{ object.hires }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.email %}
+                    <tr>
+                        <th>応募先kazuhiro_ikeda@icloud.com</th>
+                        <td>{{ object.email }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>掲載開始日</th>
+                    <td>{{ object.date }}</td>
+                </tr>
+                {% if object.expirationdate %}
+                    <tr>
+                        <th>掲載期限</th>
+                        <td>{{ object.expirationdate }}</td>
+                    </tr>
+                {% endif %}
+                {% if object.expdate %}
+                    <tr>
+                        <th>最終掲載日</th>
+                        <td>{{ object.expdate }}</td>
+                    </tr>
+                {% endif %}
+            </table>
+            {% if user.is_authenticated %}
+                <div class="info">
+                    <span class="data">作成日：{{ object.created_at }}</span>
+                    <span class="data">更新日：</span>
+                    <span class="data">コミ箱：</span>
+                </div>
+
+            {% endif %}
+            <div class="nav invert">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'list' %}" class="btn">
+                        <span class="material-symbols-outlined chevron_left">
+                            chevron_left
+                        </span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% else %}
+                    <a href="javascript:history.back();" class="btn">
+                        <span class="material-symbols-outlined chevron_left">
+                            chevron_left
+                        </span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_foot %}
+    <script>
+        $(function () {
+            $('.job_keywords').html(function () {
+                return $(this).html().trim().split(",").filter(function (x) {
+                    return x.match(/\S/);
+                }).map(function (x) {
+                    return "<span class='word'>" + x + "</span>";
+                }).join("");
+            });
+
+        });
+    </script>
+{% endblock js_foot %}

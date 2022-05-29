@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}トップページ | Create Jobs{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="admin_navi">
+            <ul>
+                <li>
+                    <a class="btn" href="{% url 'list' %}">
+                        <span class="in_text">ジョブリスト</span>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a class="btn" href="{% url 'create' %}">
+                            <span class="in_text">新規ジョブ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'jobs_export' %}">
+                            <span class="material-symbols-outlined export">file_download</span>
+                            <span class="in_text">Jobs Export</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'jobs_import' %}">
+                            <span class="material-symbols-outlined export">upload</span>
+                            <span class="in_text">Jobs Import</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock content %}

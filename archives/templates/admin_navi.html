@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}管理者ナビ | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <div class="admin_navi">
+                <ul>
+                    <li><a class="btn" href="{% url 'index' %}">トップページ</a></li>
+                    <li><a class="btn" href="{% url 'list' %}">ジョブリスト</a></li>
+                    <li><a class="btn" href="{% url 'create' %}">新規ジョブ</a></li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

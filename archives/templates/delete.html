@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list update">
+        {% if user.is_authenticated %}
+            <div class="job">
+                <div class="ttl_page">
+                    <h1 class="in_text">{{ object.title }}</h1>
+                </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        <table>
+                            <tr>
+                                <th>職種</th>
+                                <td>{{ object.category }}</td>
+                            </tr>
+                            <tr>
+                                <th>雇用形態</th>
+                                <td>{{ object.jobtype }}</td>
+                            </tr>
+                            <tr>
+                                <th>仕事内容</th>
+                                <td>{{ object.description | safe }}</td>
+                            </tr>
+                            <tr>
+                                <th>給与</th>
+                                <td>{{ object.salary | safe }}</td>
+                            </tr>
+                            {% if object.rawsalary %}
+                                <tr>
+                                    <th>給与の詳細</th>
+                                    <td>{{ object.rawsalary | safe }}</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <th>勤務地</th>
+                                <td>{{ object.streetaddress | safe }}</td>
+                            </tr>
+                            <tr>
+                                <th>最寄駅</th>
+                                <td>{{ object.station | safe }}</td>
+                            </tr>
+                            {% if object.subwayaccess %}
+                                <tr>
+                                    <th>交通アクセス</th>
+                                    <td>{{ object.subwayaccess | safe }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if object.timeshift %}
+                                <tr>
+                                    <th>勤務時間</th>
+                                    <td>{{ object.timeshift | safe }}</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <th>会社名</th>
+                                <td>{{ object.date }}</td>
+                            </tr>
+                            <tr>
+                                <th>所在地</th>
+                                <td>〒{{ object.date }} {{ object.streetaddress }}</td>
+                            </tr>
+                            {% if object.experience %}
+                                <tr>
+                                    <th>経験</th>
+                                    <td>{{ object.experience | safe }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if object.education %}
+                                <tr>
+                                    <th>最終学歴</th>
+                                    <td>{{ object.education | safe }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if object.benefits %}
+                                <tr>
+                                    <th>待遇・福利厚生</th>
+                                    <td>{{ object.benefits | safe }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </table>
+                    <div class="box_btn">
+                        <a href="{% url 'job' object.pk %}" class="button">キャンセル</a>
+                        <button type="submit" value="delete" onclick='return confirm("削除しますか？")'>削除</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

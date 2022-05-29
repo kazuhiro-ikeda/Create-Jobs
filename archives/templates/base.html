@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    {% block costom_css %}
+    {% endblock costom_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="{% url 'index' %}">
+            <span class="material-symbols-outlined explore">travel_explore</span>
+            <span class="in_text">Create Jobs</span>
+        </a>
+    </div>
+    {% if user.is_authenticated %}
+        <nav class="admin">
+            <ul>
+                <li>
+                    <a class="btn" href="{% url 'logout' %}">
+                        <span class="material-symbols-outlined logout">logout</span>
+                        <span class="in_text">ログアウト</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+</header>
+
+
+{% block content %}
+{% endblock content %}
+
+
+<footer class="footer">
+    <address id="copyright">
+        &copy; Create Jobs
+    </address>
+</footer>
+
+{% block js_foot %}
+{% endblock js_foot %}
+
+</body>
+</html>

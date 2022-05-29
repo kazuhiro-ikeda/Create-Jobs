@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list update">
+        {% if user.is_authenticated %}
+            <div class="job">
+                <p class="guide-line">
+                    テキストエリアでは一部HTMLタグが使用できます。<br>
+                    <a target="_blank" href="//developer.indeed.com/docs/ja-jp/indeed-apply/enterprise-ats/#formatting_guidelines">フォーマットのガイドライン</a>
+                </p>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <p class="require_note"><span class="require">＊</span> 必須</p>
+                    <table>
+                        <tr>
+                            <th>タイトル<span class="require">＊</span></th>
+                            <td>{{ form.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>会社名</th>
+                            <td>{{ form.company }}</td>
+                        </tr>
+                    </table>
+                    <div class="box_btn">
+                        <a class="button" href="{% url 'admin_navi' %}">キャンセル</a>
+                        <button type="submit" value="作成">作成</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

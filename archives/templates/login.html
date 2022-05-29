@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}ログイン | Create Jobs{% endblock title %}
+
+{% block content %}
+    <div class="container login">
+        <div class="material-symbols-outlined key">key</div>
+        <form method="post">{% csrf_token %}
+            <div class="item_user">
+                <input type="text" placeholder="User Name" name="username">
+            </div>
+            <div class="item_user">
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="btn">ログイン</button>
+        </form>
+        <div class="note">
+            <div class="error">{{ error }}</div>
+        </div>
+        <a class="btn" href="{% url 'index' %}">トップページ</a>
+    </div>
+{% endblock content %}
+

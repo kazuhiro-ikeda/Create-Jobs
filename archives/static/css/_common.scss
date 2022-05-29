@@ -1,0 +1,130 @@
+@charset "utf-8";
+$viewport: 750px;
+$initial: #333;
+$yugothic: '游ゴシック', YuGothic,'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif;
+$yumincho: '游明朝', YuMincho, 'HiraMinProN-W6', 'ヒラギノ明朝 ProN W6', serif;
+$railway: 'Raleway', sans-serif;
+
+
+//common
+body {
+	color: $initial;
+	font-family: $yugothic;
+	font-size: 14px;
+	word-wrap: break-word;
+	-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-text-size-adjust: 100%;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	
+	@media all and (-ms-high-contrast: none) {
+		font-weight: 500;//$yugothic
+	}
+
+	@media screen and (max-width: $viewport) {
+		width: 100%;
+		font-size: 3.4vw;
+	}
+}
+
+body::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+	display:none;
+}
+
+//link
+a {
+	color: $initial;
+	text-decoration: none;
+}
+
+a:active, a:focus {
+   outline:  none;
+}
+
+//element
+.image {
+    @media (max-width: $viewport) {
+        display: none;
+    }
+
+    &.bk {
+        display: block;
+
+        @media (max-width: $viewport) {
+            display: none;
+        }
+    }
+}
+
+.image_s {
+    display: none;
+
+    @media (max-width: $viewport) {
+        display: inline;
+    }
+
+    &.bk {
+        @media (max-width: $viewport) {
+            display: block;
+        }
+    }
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+	font-weight: normal;
+}
+
+p {
+	text-align: justify;
+}
+
+//adjust anchor
+.anc {
+	margin-top: -0px;
+    padding-top: 0px;
+
+	@media (max-width: $viewport) {
+		margin-top: -0vw;
+		padding-top: 0vw;
+	}
+}
+
+//section
+#main {
+	width: 100%;
+}
+
+//elements
+.block_p {
+	display: block;
+	@media screen and (max-width: $viewport) {
+		display: none;
+	}
+}
+
+.block_s {
+	display: none;
+	@media screen and (max-width: $viewport) {
+		display: block;
+	}
+}
+
+.inline_p {
+	display: inline;
+	@media screen and (max-width: $viewport) {
+		display: none;
+	}
+}
+
+.inline_s {
+	display: none;
+	@media screen and (max-width: $viewport) {
+		display: inline;
+	}
+}

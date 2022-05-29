@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list">
+        <div class="ttl_page">
+            <h1 class="in_text">{{ object.title }}</h1>
+        </div>
+        <div class="job">
+            <table>
+                <tr>
+                    <th>求人</th>
+                    <td>{{ object.title }}</td>
+                </tr>
+                <tr>
+                    <th>会社名</th>
+                    <td>{{ object.company }}</td>
+                </tr>
+            </table>
+            <div class="nav invert">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'list' %}" class="btn">
+                        <span class="material-symbols-outlined chevron_left">chevron_left</span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% else %}
+                    <a href="javascript:history.back();" class="btn">
+                        <span class="material-symbols-outlined chevron_left">chevron_left</span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a class="btn btn_edit" href="{% url 'update' object.pk %}">
+                        <span class="material-symbols-outlined edit_note">edit_note</span>
+                        <span class="in_text">編集</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_foot %}
+    <script>
+        $(function () {
+            $('.job_keywords').html(function () {
+                return $(this).html().trim().split(",").filter(function (x) {
+                    return x.match(/\S/);
+                }).map(function (x) {
+                    return "<span class='word'>" + x + "</span>";
+                }).join("");
+            });
+
+        });
+    </script>
+{% endblock js_foot %}

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list">
+        <div class="job">
+            <p class="require_note"><span class="require">＊</span> 必須</p>
+            <table>
+                <tr>
+                    <th>タイトル<span class="require">＊</span></th>
+                    <td>{{ object.title }}</td>
+                </tr>
+                <tr>
+                    <th>掲載開始日<span class="require">＊</span></th>
+                    <td>{{ object.date }}</td>
+                </tr>
+                <tr>
+                    <th>リファレンスナンバー[ID]</th>
+                    <td>{{ object.id }}</td>
+                </tr>
+                <tr>
+                    <th>企業名<span class="require">＊</span></th>
+                    <td>{{ object.company }}</td>
+                </tr>
+                <tr>
+                    <th>国名<span class="require">＊</span></th>
+                    <td>{{ object.country }}</td>
+                </tr>
+                <tr>
+                    <th>郵便番号<span class="require">＊</span></th>
+                    <td>{{ object.postalcode }}</td>
+                </tr>
+                <tr>
+                    <th>都道府県<span class="require">＊</span></th>
+                    <td>{{ object.state }}</td>
+                </tr>
+                <tr>
+                    <th>市区町村<span class="require">＊</span></th>
+                    <td>{{ object.city }}</td>
+                </tr>
+                <tr>
+                    <th>番地など</th>
+                    <td>{{ object.rawlocation }}</td>
+                </tr>
+                <tr>
+                    <th>勤務地</th>
+                    <td>{{ object.streetaddress }}</td>
+                </tr>
+                <tr>
+                    <th>応募先メール</th>
+                    <td>{{ object.email }}</td>
+                </tr>
+                <tr>
+                    <th>最寄駅</th>
+                    <td>{{ object.station | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>交通アクセス</th>
+                    <td>{{ object.subwayaccess | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>職種[カンマ区切り]</th>
+                    <td>{{ object.category }}</td>
+                </tr>
+                <tr>
+                    <th>雇用形態</th>
+                    <td>{{ object.jobtype }}</td>
+                </tr>
+                <tr>
+                    <th>職務内容<span class="require">＊</span></th>
+                    <td>{{ object.description | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>給与概略<span class="require">＊</span></th>
+                    <td>{{ object.salary }}</td>
+                </tr>
+                <tr>
+                    <th>給与詳細</th>
+                    <td>{{ object.rawsalary | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>勤務時間</th>
+                    <td>{{ object.timeshift | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>最終学歴</th>
+                    <td>{{ object.education | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>経験</th>
+                    <td>{{ object.experience | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>待遇・福利厚生</th>
+                    <td>{{ object.benefits | safe  }}</td>
+                </tr>
+                <tr>
+                    <th>掲載期限</th>
+                    <td>{{ object.expirationdate }}</td>
+                </tr>
+                <tr>
+                    <th>最終掲載日</th>
+                    <td>{{ object.expdate }}</td>
+                </tr>
+                <tr>
+                    <th>追跡タグ</th>
+                    <td>{{ object.tracking_url }}</td>
+                </tr>
+                <tr>
+                    <th>画像URL</th>
+                    <td>{{ object.imageUrls }}</td>
+                </tr>
+                <tr>
+                    <th>採用予定人数</th>
+                    <td>{{ object.hires }}</td>
+                </tr>
+                <tr>
+                    <th>キーワード[カンマ区切り]</th>
+                    <td>{{ object.keywords }}</td>
+                </tr>
+            </table>
+            {% if user.is_authenticated %}
+                <div class="info">
+                    <span class="data">作成日：{{ object.created_at }}</span>
+                    <span class="data">更新日：</span>
+                    <span class="data">コミ箱：</span>
+                </div>
+
+            {% endif %}
+            <div class="nav invert">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'list' %}" class="btn">
+                        <span class="material-symbols-outlined chevron_left">
+                            chevron_left
+                        </span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% else %}
+                    <a href="javascript:history.back();" class="btn">
+                        <span class="material-symbols-outlined chevron_left">
+                            chevron_left
+                        </span>
+                        <span class="in_text">一覧ページ</span>
+                    </a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a class="btn btn_edit" href="{% url 'update' object.pk %}">
+                        <span class="material-symbols-outlined edit_note">
+                            edit_note
+                        </span>
+                        <span class="in_text">編集</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_foot %}
+    <script>
+        $(function () {
+            $('.job_keywords').html(function () {
+                return $(this).html().trim().split(",").filter(function (x) {
+                    return x.match(/\S/);
+                }).map(function (x) {
+                    return "<span class='word'>" + x + "</span>";
+                }).join("");
+            });
+
+        });
+    </script>
+{% endblock js_foot %}

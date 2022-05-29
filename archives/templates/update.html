@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list update">
+        {% if user.is_authenticated %}
+            <div class="job">
+                <p class="guide-line">
+                    テキストエリアでは一部HTMLタグが使用できます。<br>
+                    <a target="_blank" href="//developer.indeed.com/docs/ja-jp/indeed-apply/enterprise-ats/#formatting_guidelines">フォーマットのガイドライン</a>
+                </p>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <p class="require_note"><span class="require">＊</span> 必須</p>
+                    <table>
+                        <tr>
+                            <th>タイトル<span class="require">＊</span></th>
+                            <td>{{ form.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                掲載開始日<span class="require">＊</span><br>
+                                2022-01-01 00:00:00
+                            </th>
+                            <td>{{ form.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>企業名<span class="require">＊</span></th>
+                            <td>{{ form.company }}</td>
+                        </tr>
+                        <tr>
+                            <th>国名<span class="require">＊</span></th>
+                            <td>{{ form.country }}</td>
+                        </tr>
+                        <tr>
+                            <th>郵便番号<span class="require">＊</span></th>
+                            <td>{{ form.postalcode }}</td>
+                        </tr>
+                        <tr>
+                            <th>都道府県<span class="require">＊</span></th>
+                            <td>{{ form.state }}</td>
+                        </tr>
+                        <tr>
+                            <th>市区町村<span class="require">＊</span></th>
+                            <td>{{ form.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>番地など</th>
+                            <td>{{ form.rawlocation }}</td>
+                        </tr>
+                        <tr>
+                            <th>勤務地<span class="require">＊</span></th>
+                            <td>{{ form.streetaddress }}</td>
+                        </tr>
+                        <tr>
+                            <th>応募先メール</th>
+                            <td>{{ form.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>最寄駅</th>
+                            <td>{{ form.station }}</td>
+                        </tr>
+                        <tr>
+                            <th>交通アクセス</th>
+                            <td>{{ form.subwayaccess }}</td>
+                        </tr>
+                        <tr>
+                            <th>職種[カンマ区切り]</th>
+                            <td>{{ form.category }}</td>
+                        </tr>
+                        <tr>
+                            <th>雇用形態</th>
+                            <td>
+                                {{ form.jobtype }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>職務内容<span class="require">＊</span></th>
+                            <td>
+                                {{ form.description }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>給与概略<span class="require">＊</span></th>
+                            <td>{{ form.salary }}</td>
+                        </tr>
+                        <tr>
+                            <th>給与詳細</th>
+                            <td>{{ form.rawsalary }}</td>
+                        </tr>
+                        <tr>
+                            <th>勤務時間</th>
+                            <td>{{ form.timeshift }}</td>
+                        </tr>
+                        <tr>
+                            <th>最終学歴</th>
+                            <td>{{ form.education }}</td>
+                        </tr>
+                        <tr>
+                            <th>経験</th>
+                            <td>{{ form.experience }}</td>
+                        </tr>
+                        <tr>
+                            <th>待遇・福利厚生</th>
+                            <td>{{ form.benefits }}</td>
+                        </tr>
+                        <tr>
+                            <th>掲載期限</th>
+                            <td>{{ form.expirationdate }}</td>
+                        </tr>
+                        <tr>
+                            <th>最終掲載日</th>
+                            <td>{{ form.expdate }}</td>
+                        </tr>
+                        <tr>
+                            <th>追跡タグ</th>
+                            <td>{{ form.tracking_url }}</td>
+                        </tr>
+                        <tr>
+                            <th>画像URL</th>
+                            <td>{{ form.imageUrls }}</td>
+                        </tr>
+                        <tr>
+                            <th>採用予定人数</th>
+                            <td>{{ form.hires }}</td>
+                        </tr>
+                        <tr>
+                            <th>キーワードリスト</th>
+                            <td>{{ form.keywords }}</td>
+                        </tr>
+                    </table>
+                    <div class="box_btn">
+                        <a class="button" href="{% url 'job' object.pk %}">キャンセル</a>
+                        <button type="submit" value="更新">更新</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

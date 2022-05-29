@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Jobs Import | Create Jobs{% endblock title %}
+
+
+{% block content %}
+    <div class="container login file_import">
+        <span class="material-symbols-outlined import">upload</span>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="item_file">
+                {{ form.file }}
+            </div>
+            <br/>
+            <button type="submit">送信</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} | Create jobs{% endblock title %}
+
+{% block content %}
+    <div class="container list update">
+        {% if user.is_authenticated %}
+            <div class="job">
+                <div class="ttl_page">
+                    <h1 class="in_text">{{ object.title }}</h1>
+                </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <td>{{ object.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>求人</th>
+                                <td>{{ object.title }}</td>
+                            </tr>
+                            <tr>
+                                <th>会社名</th>
+                                <td>{{ object.company }}</td>
+                            </tr>
+                        </table>
+                    </table>
+                    <div class="box_btn">
+                        <a href="{% url 'job' object.pk %}" class="button">キャンセル</a>
+                        <button type="submit" value="delete" onclick='return confirm("削除しますか？")'>削除</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
