@@ -12,12 +12,16 @@ class TextAreaInput(forms.Textarea):
 class JobsForm(ModelForm):
     class Meta:
         model = Jobs
-        widgets = [
-
-        ]
+        widgets = {
+            'publish': DateInput,
+            'validthrough': DateInput
+        }
         fields = [
             'title',
-            'company'
+            'publish',
+            'validthrough',
+            'company',
+            'country'
         ]
 
 class JobsImportForm(forms.Form):

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import login_func, logout_func, admin_navi_func, list_func, job_func, job_admin_func, JobDlete, JobUpdate, JobCreate, jobs_export, JobsImport
+from .views import login_func, logout_func, admin_navi_func, list_func, job_func, job_admin_func, JobDlete, JobUpdate, JobCreate, jobs_export, JobsImport, freewords
 
 urlpatterns = [
     path('login/', login_func, name='login'),
@@ -13,4 +13,5 @@ urlpatterns = [
     path('create/', JobCreate.as_view(), name='create'),
     path('jobs_export/', jobs_export, name='jobs_export'),
     path('jobs_import/', JobsImport.as_view(), name='jobs_import'),
+    path('freewords/', freewords, name='freewords')
 ]

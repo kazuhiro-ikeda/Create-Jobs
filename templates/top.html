@@ -13,6 +13,11 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li>
+                        <a class="btn" href="admin">
+                            <span class="in_text">サイト管理</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="btn" href="{% url 'create' %}">
                             <span class="in_text">新規ジョブ</span>
                         </a>
@@ -32,6 +37,13 @@
                 {% endif %}
             </ul>
         </div>
-
+        <div class="free-words">
+            <form method="GET" action="{% url 'freewords' %}">
+                <div class="item_user">
+                    <input type="text" name="keyword" placeholder="対象：タイトル、会社名検索">
+                </div>
+                <button type="submit">検索</button>
+            </form>
+        </div>
     </div>
 {% endblock content %}

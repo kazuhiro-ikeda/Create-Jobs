@@ -7,6 +7,14 @@
         <div class="ttl_page">
             <h1 class="in_text">Job List</h1>
         </div>
+        {% if messages %}
+            <div class="results-message">
+                {% for message in messages %}
+                    {{ message | safe }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {{ zero }}
         {% for object in object_list %}
             <div class="job">
                 <table>

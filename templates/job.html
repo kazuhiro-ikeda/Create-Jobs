@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ object.title }} | Create jobs{% endblock title %}
+{% block json %}
+{% include 'google_for_jobs.html' %}
+{% endblock json %}
 
 {% block content %}
     <div class="container list">
@@ -14,8 +17,20 @@
                     <td>{{ object.title }}</td>
                 </tr>
                 <tr>
+                    <th>公開日</th>
+                    <td>{{ object.publish }}</td>
+                </tr>
+                <tr>
+                    <th>公開終了日</th>
+                    <td>{{ object.validthrough }}</td>
+                </tr>
+                <tr>
                     <th>会社名</th>
                     <td>{{ object.company }}</td>
+                </tr>
+                <tr>
+                    <th>国名</th>
+                    <td>{{ object.country }}</td>
                 </tr>
             </table>
             <div class="nav invert">
@@ -34,6 +49,10 @@
                     <a class="btn btn_edit" href="{% url 'update' object.pk %}">
                         <span class="material-symbols-outlined edit_note">edit_note</span>
                         <span class="in_text">編集</span>
+                    </a>
+                    <a href="{% url 'job_admin' object.pk %}" class="btn btn_admin">
+                        <span class="in_text">管理者詳細</span>
+                        <span class="material-symbols-outlined chevron_right admin">chevron_right</span>
                     </a>
                 {% endif %}
             </div>

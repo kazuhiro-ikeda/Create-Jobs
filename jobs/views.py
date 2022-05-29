@@ -12,6 +12,8 @@ from .models import Jobs
 from .forms import JobsForm, JobsImportForm
 import csv
 import io
+from django.contrib import messages
+from django.db.models import Q
 
 
 def login_func(request):
@@ -85,7 +87,10 @@ def jobs_export(request):
     fieldnames = [
         'ID[編集不可]',
         'タイトル[必須]',
+        '公開日[必須]',
+        '公開終了日[必須]',
         '会社名[必須]',
+        '国名[必須]'
     ]
     writer = csv.DictWriter(response, fieldnames=fieldnames)
     writer.writeheader()
@@ -94,7 +99,10 @@ def jobs_export(request):
             {
                 'ID[編集不可]': object.id,
                 'タイトル[必須]': object.title,
-                '会社名[必須]': object.company
+                '公開日[必須]': object.publish,
+                '公開終了日[必須]': object.validthrough,
+                '会社名[必須]': object.company,
+                '国名[必須]': object.country
             }
         )
     return response
@@ -114,20 +122,49 @@ class JobsImport(generic.FormView):
         csvfile = io.TextIOWrapper(form.cleaned_data['file'])
         reader = csv.reader(csvfile)
         header = next(reader)
-
         for row in reader:
             """
             このコードも動作
             key = row[0] if row[0] else None
             object, created = Jobs.objects.get_or_create(id=key)
             """
-
             if row[0]:
                 object = Jobs.objects.get(id=row[0])
             else:
                 object = Jobs.objects.create()
 
             object.title = row[1]
-            object.company = row[2]
+            object.publish = row[2]
+            object.validthrough = row[3]
+            object.company = row[4]
+            object.country = row[5]
             object.save()
         return super().form_valid(form)
+
+
+"""def freewords(request):
+    object_list = Jobs.objects.all()
+    keyword = request.GET.get('keyword')
+    if keyword:
+        object_list = object_list.filter(
+            Q(title__icontains=keyword ) | Q(company__icontains=keyword)
+        )
+        l = len(object_list)
+        messages.success(request, '[ <span class="emphasis">{}</span> ]の検索結果'.format(keyword))
+        messages.info(request, '結果は[ <span class="emphasis">{}</span> ]件でした'.format(l))
+    return render(request, 'list.html', {'object_list': object_list})"""
+
+
+def freewords(request):
+    object_list = Jobs.objects.all()
+    keyword = request.GET.get('keyword')
+    if keyword:
+        keywords = keyword.split()
+        for keys in keywords:
+            object_list = object_list.filter(
+                Q(title__icontains=keys) | Q(company__icontains=keys)
+            )
+        messages.info(request, '[ <span class="emphasis">{}</span> ]の検索結果は['.format(keyword))
+        messages.success(request, '<span class="emphasis">{}</span> ]件でした'.format(len(object_list)))
+
+    return render(request, 'list.html', {'object_list': object_list})

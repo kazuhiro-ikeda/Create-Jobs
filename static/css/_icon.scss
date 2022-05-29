@@ -1,14 +1,7 @@
 @charset "utf-8";
 //icon
 .material-symbols-outlined {
-    &.explore {
-        font-size: 40px;
-
-        @media (max-width: $viewport) {
-            font-size: 8.5vw;
-        }
-    }
-
+    //login panel
     &.key {
         font-size: 40px;
 
@@ -17,19 +10,12 @@
         }
     }
 
+    //top
     &.import {
         font-size: 40px;
 
         @media (max-width: $viewport) {
             font-size: 8vw;
-        }
-    }
-
-    &.logout {
-        font-size: 14px;
-
-        @media (max-width: $viewport) {
-            font-size: 4vw;
         }
     }
 

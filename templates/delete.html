@@ -12,20 +12,30 @@
                 <form method="POST" action="">
                     {% csrf_token %}
                     <table>
-                        <table>
-                            <tr>
-                                <th>ID</th>
-                                <td>{{ object.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>求人</th>
-                                <td>{{ object.title }}</td>
-                            </tr>
-                            <tr>
-                                <th>会社名</th>
-                                <td>{{ object.company }}</td>
-                            </tr>
-                        </table>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{ object.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>求人<span class="require">＊</span></th>
+                            <td>{{ object.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>公開日</th>
+                            <td>{{ object.publish }}</td>
+                        </tr>
+                        <tr>
+                            <th>公開終了日</th>
+                            <td>{{ object.validthrough }}</td>
+                        </tr>
+                        <tr>
+                            <th>会社名</th>
+                            <td>{{ object.company }}</td>
+                        </tr>
+                        <tr>
+                            <th>国名</th>
+                            <td>{{ object.country }}</td>
+                        </tr>
                     </table>
                     <div class="box_btn">
                         <a href="{% url 'job' object.pk %}" class="button">キャンセル</a>
