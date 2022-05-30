@@ -63,7 +63,8 @@ class JobDlete(DeleteView):
 
 
 class JobUpdate(UpdateView):
-    template_name = 'update.html'
+    # template_name = 'update.html'
+    template_name = 'create.html'
     model = Jobs
     form_class = JobsForm
 

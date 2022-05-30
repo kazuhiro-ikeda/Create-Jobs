@@ -16,16 +16,46 @@ class JobModelForm(ModelForm):
     class Meta:
         model = JobModel
         widgets = {
-            'publish': DateInput(),
-            'validthrough': DateInput(),
+            'date': DateInput(),
+            'expirationdate': DateInput(),
+            'expdate': DateInput(),
+            'station': TextAreaInput(),
+            'subwayaccess': TextAreaInput(),
             'description': TextAreaInput(),
+            'rawsalary': TextAreaInput(),
+            'timeshift': TextAreaInput(),
+            'education': TextAreaInput(),
+            'experience': TextAreaInput(),
+            'benefits': TextAreaInput(),
         }
         fields = [
             'title',
             'publish',
             'validthrough',
             'company',
-            'country'
+            'country',
+            'state',
+            'city',
+            'rawlocation',
+            'streetaddress',
+            'email',
+            'station',
+            'subwayaccess',
+            'category',
+            'jobtype',
+            'description',
+            'salary',
+            'rawsalary',
+            'timeshift',
+            'education',
+            'experience',
+            'benefits',
+            'expirationdate',
+            'expdate',
+            'tracking_url',
+            'imageUrls',
+            'hires',
+            'keywords'
         ]
 
 
