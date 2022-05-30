@@ -8,7 +8,7 @@ from django.views import generic
 from django.urls import reverse, reverse_lazy
 from django.http import StreamingHttpResponse
 from django import forms
-from .models import Jobs
+from .models import Jobs, Jobtype
 from .forms import JobsForm, JobsImportForm
 import csv
 import io
@@ -91,7 +91,7 @@ def jobs_export(request):
         '公開日[必須]',
         '公開終了日[必須]',
         '会社名[必須]',
-        '国名[必須]'
+        '国名[必須]',
     ]
     writer = csv.DictWriter(response, fieldnames=fieldnames)
     writer.writeheader()
@@ -103,7 +103,7 @@ def jobs_export(request):
                 '公開日[必須]': object.publish,
                 '公開終了日[必須]': object.validthrough,
                 '会社名[必須]': object.company,
-                '国名[必須]': object.country
+                '国名[必須]': object.country,
             }
         )
     return response
@@ -171,3 +171,7 @@ def freewords(request):
 
     return render(request, 'list.html', {'object_list': object_list})
 
+
+def jobtype_list_func(request):
+    object_list = Jobtype.objects.all()
+    return render(request, 'jobtype_list.html', {'object_list': object_list})
