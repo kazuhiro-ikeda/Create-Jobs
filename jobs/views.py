@@ -142,7 +142,8 @@ class JobsImport(generic.FormView):
         return super().form_valid(form)
 
 
-"""def freewords(request):
+"""シングルワード
+def freewords(request):
     object_list = Jobs.objects.all()
     keyword = request.GET.get('keyword')
     if keyword:
@@ -168,3 +169,4 @@ def freewords(request):
         messages.success(request, '<span class="emphasis">{}</span> ]件でした'.format(len(object_list)))
 
     return render(request, 'list.html', {'object_list': object_list})
+

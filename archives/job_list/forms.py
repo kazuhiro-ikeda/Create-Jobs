@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, ChoiceField
 from .models import JobModel
 
 
@@ -16,48 +16,20 @@ class JobModelForm(ModelForm):
     class Meta:
         model = JobModel
         widgets = {
-            'date': DateInput(),
-            'expirationdate': DateInput(),
-            'expdate': DateInput(),
-            'station': TextAreaInput(),
-            'subwayaccess': TextAreaInput(),
+            'publish': DateInput(),
+            'validthrough': DateInput(),
             'description': TextAreaInput(),
-            'rawsalary': TextAreaInput(),
-            'timeshift': TextAreaInput(),
-            'education': TextAreaInput(),
-            'experience': TextAreaInput(),
-            'benefits': TextAreaInput(),
         }
         fields = [
             'title',
-            'date',
+            'publish',
+            'validthrough',
             'company',
-            'country',
-            'postalcode',
-            'state',
-            'city',
-            'rawlocation',
-            'streetaddress',
-            'email',
-            'station',
-            'subwayaccess',
-            'category',
-            'jobtype',
-            'description',
-            'salary',
-            'rawsalary',
-            'timeshift',
-            'education',
-            'experience',
-            'benefits',
-            'expirationdate',
-            'expdate',
-            'tracking_url',
-            'imageUrls',
-            'hires',
-            'keywords'
+            'country'
         ]
 
 
 class CSVUploadForm(forms.Form):
     file = forms.FileField(label='jobs.csv')
+
+
