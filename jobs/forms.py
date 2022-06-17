@@ -30,8 +30,7 @@ class JobsForm(ModelForm):
             'publish',
             'validthrough',
             'company',
-            'country',
-            'jobtype'
+            'country'
         ]
 
 class JobsImportForm(forms.Form):

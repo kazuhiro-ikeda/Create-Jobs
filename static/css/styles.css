@@ -240,11 +240,11 @@ p {
   }
 }
 
-.login .material-symbols-outlined.key {
+.material-symbols-outlined.key {
   font-size: 40px;
 }
 @media (max-width: 750px) {
-  .login .material-symbols-outlined.key {
+  .material-symbols-outlined.key {
     font-size: 8vw;
   }
 }

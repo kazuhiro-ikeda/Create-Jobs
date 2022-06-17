@@ -2,8 +2,8 @@
 //icon
 .material-symbols-outlined {
     //login panel
-    .login &.key {
-         font-size: 40px;
+    &.key {
+        font-size: 40px;
 
         @media (max-width: $viewport) {
             font-size: 8vw;

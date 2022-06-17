@@ -1,10 +1,8 @@
 from django.contrib import admin
-from .models import Jobs, Jobtype
+from .models import Jobs
 
 # Register your models here.
 admin.site.register(Jobs)
-admin.site.register(Jobtype)
-
 
 """
     管理画面タイトル変更
